@@ -5,13 +5,17 @@ function clone(obj) {
 }
 
 const defaultProperties = {
+    debug: false,
     bg: 'white',
     area: 'fullscreen',
     color: '#5ECDEF',
     count: 50,
     speed: 1,
-    useRotate: true,
-    useScale: true,
+    rotation: true,
+    minOpacity: 0.6,
+    maxOpacity: 1,
+    minSize: 8,
+    maxSize: 18,
     wind: true
 };
 
@@ -24,7 +28,7 @@ new Vue({
     created: function() {
         this.updateSnowflakes();
 
-        ['area', 'color', 'count', 'speed', 'useRotate', 'useScale', 'wind'].forEach(prop => {
+        ['area', 'color', 'count', 'speed', 'rotation', 'minOpacity', 'maxOpacity', 'minSize', 'maxSize', 'wind'].forEach(prop => {
             this.$watch(prop, this.updateSnowflakes);
         });
     },
@@ -58,6 +62,15 @@ new Vue({
         },
         changeBg() {
             document.body.style.background = this.bg;
+        },
+        setDebug() {
+            const dom = document.body;
+
+            if (this.debug) {
+                dom.classList.add('debug');
+            } else {
+                dom.classList.remove('debug');
+            }
         },
         loadFPS() {
             this.isFpsDisabled = true;

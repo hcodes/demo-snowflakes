@@ -6,6 +6,10 @@ html, body {
     transition: .5s background-color ease;
 }
 
+body.debug .snowflake {
+    border: 1px solid red;
+}
+
 body,
 input {
     font-family: Arial, sans-serif;
@@ -40,8 +44,25 @@ label {
         margin-left: 10px;
     }
 
+    &__label {
+        display: inline-block;
+        width: 80px;
+    }
+
+    &__label_radio {
+        margin-right: 1em;
+    }
+
     &__group {
-        margin-top: 10px;
+        padding: 5px;
+
+        input[type="number"] {
+            width: 4em;
+        }
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
     }
 
     &__title {
@@ -52,7 +73,7 @@ label {
     }
 
     &__body {
-        padding: 5px 10px 10px 10px;
+        padding: 5px;
     }
 
     &__bottom {
