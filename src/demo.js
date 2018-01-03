@@ -1,44 +1,26 @@
 import Vue from 'vue';
+import {code, defaultProperties as defaultCodeProperties} from './code';
+import {clone} from './utils';
 
-function clone(obj) {
-    return JSON.parse(JSON.stringify(obj));
-}
+const defaultDataProperties = clone(defaultCodeProperties);
+defaultDataProperties.debug = false;
+defaultDataProperties.bg = 'white';
 
-const defaultProperties = {
-    debug: false,
-    bg: 'white',
-    area: 'fullscreen',
-    color: '#5ECDEF',
-    count: 50,
-    speed: 1,
-    rotation: true,
-    minOpacity: 0.6,
-    maxOpacity: 1,
-    minSize: 8,
-    maxSize: 18,
-    wind: true
-};
-
-const data = clone(defaultProperties);
+const data = clone(defaultDataProperties);
 data.isFpsDisabled = false;
 
-new Vue({
+const demo = new Vue({
     el: '.demo',
     data: data,
     created: function() {
         this.updateSnowflakes();
 
-        ['area', 'color', 'count', 'speed', 'rotation', 'minOpacity', 'maxOpacity', 'minSize', 'maxSize', 'wind'].forEach(prop => {
-            this.$watch(prop, this.updateSnowflakes);
+        Object.keys(defaultCodeProperties).forEach(prop => {
+            this.$watch(prop, this.updateSnowflakes.bind(this, prop));
         });
     },
-    computed: {
-        stopButtonValue: function() {
-            return this.stop ? 'Start' : 'Stop';
-        }
-    },
     methods: {
-        updateSnowflakes() {
+        updateSnowflakes(prop) {
             if (this._snow) {
                 this._snow.destroy();
                 delete this._snow;
@@ -46,14 +28,19 @@ new Vue({
 
             const props = clone(this.$data);
             props.container = this.area === 'fullscreen' ? document.body : document.querySelector('.demo__layer');
+
             clearTimeout(this._timer);
             this._timer = setTimeout(() => {
                 this._snow = new Snowflakes(props);
             }, 1);
+
+            if (prop) {
+                code[prop] = this[prop];
+            }
         },
         setDefault() {
-            Object.keys(defaultProperties).forEach(key => {
-                this[key] = defaultProperties[key];
+            Object.keys(defaultDataProperties).forEach(key => {
+                this[key] = defaultDataProperties[key];
             });
         },
         toggleStop() {
@@ -61,7 +48,11 @@ new Vue({
             this._snow[this.stop ? 'stop' : 'start']();
         },
         changeBg() {
-            document.body.style.background = this.bg;
+            const body = document.body;
+
+            body.classList.remove('body_bg_white');
+            body.classList.remove('body_bg_black');
+            body.classList.add('body_bg_' + this.bg);
         },
         setDebug() {
             const dom = document.body;
@@ -90,3 +81,5 @@ new Vue({
         }
     }
 });
+
+export default demo;

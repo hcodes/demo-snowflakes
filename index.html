@@ -5,32 +5,37 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link rel="stylesheet" href="dist/demo.css" />
+    <link rel="stylesheet" href="dist/index.css" />
 </head>
 <body class="demo_bg_white demo_size_fullscreen">
+    <h1 class="header">Falling snowflakes <a href="https://github.com/hcodes/snowflakes" class="github">Back</a></h1>
+    <div class="code">
+        <div class="code__label">Code: <input class="code__copy" type="button" @click="copy" value="Copy" /></div>
+        <textarea class="code__textarea">{{getCode()}}</textarea>
+    </div>
     <div class="demo">
         <div :class="{demo__layer: true, demo__layer_visible: area === 'layer'}"></div>
         <form class="demo__form" autocomplete="off">
-            <div class="demo__title">Falling snowflakes</div>
+            <div class="demo__title">Settings</div>
             <div class="demo__body">
                 <div class="demo__group">
-                    <label class="demo__label">Area:</label>
+                    <label class="demo__label">area:</label>
                     <label class="demo__label_radio"><input name="area" type="radio" value="fullscreen" v-model="area" /> Fullscreen</label>
                     <label class="demo__label_radio"><input name="area" type="radio" value="layer" v-model="area" /> Layer</label>
                 </div>
 
                 <div class="demo__group">
-                    <label class="demo__label">Background:</label>
+                    <label class="demo__label">background:</label>
                     <label class="demo__label_radio"><input name="bg" type="radio" value="white" checked v-model="bg" @change="changeBg" /> White</label>
                     <label class="demo__label_radio"><input name="bg" type="radio" value="black" v-model="bg" @change="changeBg" /> Black</label>
                 </div>
 
                 <div class="demo__group">
-                    <label class="demo__label">Color:</label> <input type="color" v-model.trim="color" />
+                    <label class="demo__label">color:</label> <input type="color" v-model.trim="color" />
                 </div>
 
                 <div class="demo__group">
-                    <label class="demo__label">Count:</label> <input type="number" v-model.number="count" min="1" max="300" />
+                    <label class="demo__label">count:</label> <input type="number" v-model.number="count" min="1" max="300" />
                 </div>
 
                 <div class="demo__group">
@@ -50,30 +55,31 @@
                 </div>
 
                 <div class="demo__group">
-                    <label class="demo__label_checkbox"><input type="checkbox" v-model="rotation" /> Rotation</label>
+                    <label class="demo__label_checkbox"><input type="checkbox" v-model="rotation" /> rotation</label>
                 </div>
 
                 <div class="demo__group">
-                    <label class="demo__label">Speed:</label> <input type="number" v-model.number="speed" min="0.1" max="3" step="0.1" />
+                    <label class="demo__label">speed:</label> <input type="number" v-model.number="speed" min="0.1" max="3" step="0.1" />
                 </div>
 
                 <div class="demo__group">
-                    <label class="demo__label_checkbox"><input type="checkbox" v-model="wind" /> Wind</label>
+                    <label class="demo__label_checkbox"><input type="checkbox" v-model="wind" /> wind</label>
                 </div>
 
                 <div class="demo__group">
-                    <label class="demo__label_checkbox"><input type="checkbox" v-model="debug" @change="setDebug" /> Debug</label>
+                    <label class="demo__label_checkbox"><input type="checkbox" v-model="debug" @change="setDebug" /> debug</label>
                 </div>
             </div>
 
             <div class="demo__bottom">
-                <input type="button" @click="toggleStop" :value="stopButtonValue" />
+                <input type="button" @click="toggleStop" :value="this.stop ? 'Start' : 'Stop'" />
                 <input type="button" class="demo__default" @click="setDefault" value="Default" />
                 <input type="button" class="demo__fps" @click="loadFPS" :disabled="isFpsDisabled" value="Show FPS"/>
             </div>
         </form>
     </div>
     <script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.js"></script>
-    <script src="dist/demo.js"></script>
+    <!--<script src="../snowflakes/dist/snowflakes.js"></script>-->
+    <script src="dist/index.js"></script>
 </body>
 </html>

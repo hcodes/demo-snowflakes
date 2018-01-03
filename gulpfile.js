@@ -9,10 +9,10 @@ const
     replace = require('rollup-plugin-replace');
 
 gulp.task('js', function() {
-    return gulp.src('src/demo.js')
+    return gulp.src('src/index.js')
         .pipe($.rollup({
             allowRealFiles: true,
-            input: 'src/demo.js',
+            input: 'src/index.js',
             format: 'iife',
             plugins: [
                 alias({
@@ -29,7 +29,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('css', function() {
-    return gulp.src('src/*.less')
+    return gulp.src('src/index.less')
         .pipe($.less())
         .pipe($.cleancss())
         .pipe($.autoprefixer({
