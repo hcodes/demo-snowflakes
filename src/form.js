@@ -9,8 +9,8 @@ defaultDataProperties.bg = 'white';
 const data = clone(defaultDataProperties);
 data.isFpsDisabled = false;
 
-const demo = new Vue({
-    el: '.demo',
+const form = new Vue({
+    el: '.form',
     data: data,
     created: function() {
         this.updateSnowflakes();
@@ -27,16 +27,14 @@ const demo = new Vue({
             }
 
             const props = clone(this.$data);
-            props.container = this.area === 'fullscreen' ? document.body : document.querySelector('.demo__layer');
+            props.container = this.area === 'fullscreen' ? document.body : document.querySelector('.form__layer');
 
             clearTimeout(this._timer);
             this._timer = setTimeout(() => {
                 this._snow = new Snowflakes(props);
             }, 1);
 
-            if (prop) {
-                code[prop] = this[prop];
-            }
+            code.set(props);
         },
         setDefault() {
             Object.keys(defaultDataProperties).forEach(key => {
@@ -82,4 +80,4 @@ const demo = new Vue({
     }
 });
 
-export default demo;
+export default form;

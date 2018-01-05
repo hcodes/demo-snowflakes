@@ -10,71 +10,71 @@
 <body class="demo_bg_white demo_size_fullscreen">
     <h1 class="header">Falling snowflakes <a href="https://github.com/hcodes/snowflakes" class="github">Back</a></h1>
     <div class="code">
-        <div class="code__label">Code: <input class="code__copy" type="button" @click="copy" value="Copy" /></div>
-        <textarea class="code__textarea">{{getCode()}}</textarea>
+        <div class="code__label">Code: <input class="code__copy" type="button" ref="copy" @click="copy" value="Copy" /></div>
+        <textarea class="code__textarea" ref="textarea" v-model="value" @click="selectAll"></textarea>
     </div>
-    <div class="demo">
-        <div :class="{demo__layer: true, demo__layer_visible: area === 'layer'}"></div>
-        <form class="demo__form" autocomplete="off">
-            <div class="demo__title">Settings</div>
-            <div class="demo__body">
-                <div class="demo__group">
-                    <label class="demo__label">area:</label>
-                    <label class="demo__label_radio"><input name="area" type="radio" value="fullscreen" v-model="area" /> Fullscreen</label>
-                    <label class="demo__label_radio"><input name="area" type="radio" value="layer" v-model="area" /> Layer</label>
+    <div class="form">
+        <div :class="{form__layer: true, form__layer_visible: area === 'layer'}" ref="layer"></div>
+        <form class="form__panel" autocomplete="off">
+            <div class="form__title">Settings</div>
+            <div class="form__body">
+                <div class="form__group">
+                    <label class="form__label">area:</label>
+                    <label class="form__label_radio"><input name="area" type="radio" value="fullscreen" v-model="area" /> Fullscreen</label>
+                    <label class="form__label_radio"><input name="area" type="radio" value="layer" v-model="area" /> Layer</label>
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label">background:</label>
-                    <label class="demo__label_radio"><input name="bg" type="radio" value="white" checked v-model="bg" @change="changeBg" /> White</label>
-                    <label class="demo__label_radio"><input name="bg" type="radio" value="black" v-model="bg" @change="changeBg" /> Black</label>
+                <div class="form__group">
+                    <label class="form__label">background:</label>
+                    <label class="form__label_radio"><input name="bg" type="radio" value="white" checked v-model="bg" @change="changeBg" /> White</label>
+                    <label class="form__label_radio"><input name="bg" type="radio" value="black" v-model="bg" @change="changeBg" /> Black</label>
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label">color:</label> <input type="color" v-model.trim="color" />
+                <div class="form__group">
+                    <label class="form__label">color:</label> <input type="color" v-model.trim="color" />
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label">count:</label> <input type="number" v-model.number="count" min="1" max="300" />
+                <div class="form__group">
+                    <label class="form__label">count:</label> <input type="number" v-model.number="count" min="1" max="300" />
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label">minOpacity:</label> <input type="number" v-model.number="minOpacity" min="0" max="1" step="0.1" />
+                <div class="form__group">
+                    <label class="form__label">minOpacity:</label> <input type="number" v-model.number="minOpacity" min="0" max="1" step="0.1" />
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label">maxOpacity:</label> <input type="number" v-model.number="maxOpacity" min="0" max="1" step="0.1" />
+                <div class="form__group">
+                    <label class="form__label">maxOpacity:</label> <input type="number" v-model.number="maxOpacity" min="0" max="1" step="0.1" />
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label">minSize:</label> <input type="number" v-model.number="minSize" min="1" step="1" />
+                <div class="form__group">
+                    <label class="form__label">minSize:</label> <input type="number" v-model.number="minSize" min="1" step="1" />
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label">maxSize:</label> <input type="number" v-model.number="maxSize" min="1" step="1" />
+                <div class="form__group">
+                    <label class="form__label">maxSize:</label> <input type="number" v-model.number="maxSize" min="1" step="1" />
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label_checkbox"><input type="checkbox" v-model="rotation" /> rotation</label>
+                <div class="form__group">
+                    <label class="form__label_checkbox"><input type="checkbox" v-model="rotation" /> rotation</label>
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label">speed:</label> <input type="number" v-model.number="speed" min="0.1" max="3" step="0.1" />
+                <div class="form__group">
+                    <label class="form__label">speed:</label> <input type="number" v-model.number="speed" min="0.1" max="3" step="0.1" />
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label_checkbox"><input type="checkbox" v-model="wind" /> wind</label>
+                <div class="form__group">
+                    <label class="form__label_checkbox"><input type="checkbox" v-model="wind" /> wind</label>
                 </div>
 
-                <div class="demo__group">
-                    <label class="demo__label_checkbox"><input type="checkbox" v-model="debug" @change="setDebug" /> debug</label>
+                <div class="form__group">
+                    <label class="form__label_checkbox"><input type="checkbox" v-model="debug" @change="setDebug" /> debug</label>
                 </div>
             </div>
 
-            <div class="demo__bottom">
+            <div class="form__bottom">
                 <input type="button" @click="toggleStop" :value="this.stop ? 'Start' : 'Stop'" />
-                <input type="button" class="demo__default" @click="setDefault" value="Default" />
-                <input type="button" class="demo__fps" @click="loadFPS" :disabled="isFpsDisabled" value="Show FPS"/>
+                <input type="button" class="form__default" @click="setDefault" value="Default" />
+                <input type="button" class="form__fps" @click="loadFPS" :disabled="isFpsDisabled" value="Show FPS"/>
             </div>
         </form>
     </div>
