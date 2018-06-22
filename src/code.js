@@ -25,7 +25,7 @@ const code = new Vue({
                 count = 0,
                 tab = '    ';
 
-            Object.keys(defaultProperties).forEach(function(key, i) {
+            Object.keys(defaultProperties).forEach(function(key) {
                 if (typeof defaultProperties[key] !== 'undefined' && props[key] !== defaultProperties[key]) {
                     if (count) {
                         result += ',\n';
@@ -65,7 +65,7 @@ const code = new Vue({
         selectAll() {
             this.$refs.textarea.select();
         },
-        copy(e) {
+        copy() {
             try {
                 this.$refs.textarea.select();
                 document.execCommand('copy');

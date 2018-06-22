@@ -15,24 +15,38 @@ const form = new Vue({
     created: function() {
         this.updateSnowflakes();
 
-        Object.keys(defaultCodeProperties).forEach(prop => {
+        Object.keys(defaultDataProperties).forEach(prop => {
             this.$watch(prop, this.updateSnowflakes.bind(this, prop));
         });
     },
     methods: {
         updateSnowflakes(prop) {
-            if (this._snow) {
-                this._snow.destroy();
-                delete this._snow;
-            }
-
+            const body = document.body;
             const props = clone(this.$data);
-            props.container = this.area === 'fullscreen' ? document.body : document.querySelector('.form__layer');
+            props.container = this.area === 'fullscreen' ? body : document.querySelector('.form__layer');
 
-            clearTimeout(this._timer);
-            this._timer = setTimeout(() => {
-                this._snow = new Snowflakes(props);
-            }, 1);
+            if (['debug', 'bg'].indexOf(prop) > -1) {
+                if (this.debug) {
+                    body.classList.add('debug');
+                } else {
+                    body.classList.remove('debug');
+                }
+
+                body.classList.remove('body_bg_white');
+                body.classList.remove('body_bg_black');
+                body.classList.add('body_bg_' + this.bg);
+            } else {
+                if (this._snow) {
+                    this._snow.destroy();
+                    delete this._snow;
+                }
+
+                clearTimeout(this._timer);
+
+                this._timer = setTimeout(() => {
+                    this._snow = new Snowflakes(props);
+                }, 1);    
+            }
 
             code.set(props);
         },
@@ -44,22 +58,6 @@ const form = new Vue({
         toggleStop() {
             this.stop = !this.stop;
             this._snow[this.stop ? 'stop' : 'start']();
-        },
-        changeBg() {
-            const body = document.body;
-
-            body.classList.remove('body_bg_white');
-            body.classList.remove('body_bg_black');
-            body.classList.add('body_bg_' + this.bg);
-        },
-        setDebug() {
-            const dom = document.body;
-
-            if (this.debug) {
-                dom.classList.add('debug');
-            } else {
-                dom.classList.remove('debug');
-            }
         },
         loadFPS() {
             this.isFpsDisabled = true;

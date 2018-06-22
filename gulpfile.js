@@ -3,23 +3,21 @@
 const
     gulp = require('gulp'),
     $ = require('gulp-load-plugins')(),
-    fs = require('fs'),
     babel = require('rollup-plugin-babel'),
     alias = require('rollup-plugin-alias'),
     replace = require('rollup-plugin-replace');
 
-gulp.task('js', function() {
-    return gulp.src('src/index.js')
+gulp.task('js', function js() {
+    return gulp.src(['src/**/*.js', 'node_modules/vue/dist/**/*.js'])
         .pipe($.rollup({
-            allowRealFiles: true,
             input: 'src/index.js',
-            format: 'iife',
+            output: { format: 'iife' },
             plugins: [
                 alias({
-                  'vue': 'node_modules/vue/dist/vue.esm.js'
+                    'vue': 'node_modules/vue/dist/vue.esm.js'
                 }),
                 replace({
-                  'process.env.NODE_ENV': JSON.stringify('production')
+                    'process.env.NODE_ENV': JSON.stringify('production')
                 }),
                 babel()
             ]
@@ -28,7 +26,7 @@ gulp.task('js', function() {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('css', function() {
+gulp.task('css', function css() {
     return gulp.src('src/index.less')
         .pipe($.less())
         .pipe($.cleancss())
@@ -38,8 +36,4 @@ gulp.task('css', function() {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch', ['default'], function() {
-    gulp.watch('src/**/*', ['default']);
-});
-
-gulp.task('default', ['js', 'css']);
+gulp.task('default', gulp.series('js', 'css'));
