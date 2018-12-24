@@ -21,7 +21,7 @@ const code = new Vue({
     methods: {
         set(props) {
             let
-                result = '<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>\n<script>\n    var sf = new Snowflakes(',
+                result = '// Paste the code inside the <body> tag\n<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>\n<script>\n    var sf = new Snowflakes(',
                 count = 0,
                 tab = '    ';
 
