@@ -69,7 +69,9 @@ const code = new Vue({
             try {
                 this.$refs.textarea.select();
                 document.execCommand('copy');
-            } catch (e) {}
+            } catch (e) {
+                // silence
+            }
         }
     }
 });
