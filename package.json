@@ -44,7 +44,13 @@
   },
   "scripts": {
     "test": "eslint .",
-    "build": "gulp"
+    "build": "gulp",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
-  "private": true
+  "private": true,
+  "snyk": true,
+  "dependencies": {
+    "snyk": "^1.192.0"
+  }
 }
