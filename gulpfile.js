@@ -2,14 +2,19 @@
 
 const
     gulp = require('gulp'),
-    $ = require('gulp-load-plugins')(),
     alias = require('@rollup/plugin-alias'),
+    autoprefixer = require('autoprefixer'),
+    cssnano = require('cssnano'),
     babel = require('rollup-plugin-babel'),
-    replace = require('rollup-plugin-replace');
+    replace = require('rollup-plugin-replace'),
+    postcss = require('gulp-postcss'),
+    less = require('gulp-less'),
+    rollup = require('gulp-rollup'),
+    uglify = require('gulp-uglify');
 
 gulp.task('js', function js() {
     return gulp.src(['src/**/*.js', 'node_modules/vue/dist/**/*.js'])
-        .pipe($.rollup({
+        .pipe(rollup({
             input: 'src/index.js',
             output: { format: 'iife' },
             plugins: [
@@ -24,15 +29,17 @@ gulp.task('js', function js() {
                 babel()
             ]
         }))
-        .pipe($.uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('css', function css() {
     return gulp.src('src/index.less')
-        .pipe($.less())
-        .pipe($.cleancss())
-        .pipe($.autoprefixer())
+        .pipe(less())
+        .pipe(postcss([
+            autoprefixer(),
+            cssnano()
+        ]))
         .pipe(gulp.dest('dist/'));
 });
 
