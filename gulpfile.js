@@ -6,7 +6,7 @@ const
     autoprefixer = require('autoprefixer'),
     cssnano = require('cssnano'),
     babel = require('rollup-plugin-babel'),
-    replace = require('rollup-plugin-replace'),
+    replace = require('@rollup/plugin-replace'),
     postcss = require('gulp-postcss'),
     less = require('gulp-less'),
     rollup = require('gulp-rollup'),
