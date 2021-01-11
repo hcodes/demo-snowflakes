@@ -8,8 +8,8 @@ const defaultProperties = {
     rotation: true,
     minOpacity: 0.6,
     maxOpacity: 1,
-    minSize: 8,
-    maxSize: 18,
+    minSize: 10,
+    maxSize: 25,
     wind: true
 };
 

@@ -43,4 +43,9 @@ gulp.task('css', function css() {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('default', gulp.series('js', 'css'));
+gulp.task('copy-snowflakes', function copySnowflakes() {
+    return gulp.src('node_modules/magic-snowflakes/dist/snowflakes.min.js')
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('default', gulp.series('js', 'css', 'copy-snowflakes'));
