@@ -8,6 +8,8 @@ defaultDataProperties.bg = 'white';
 
 const data = clone(defaultDataProperties);
 data.isFpsDisabled = false;
+data.stop = false;
+data.hidden = false;
 
 const form = new Vue({
     el: '.form',
@@ -45,7 +47,7 @@ const form = new Vue({
 
                 this._timer = setTimeout(() => {
                     this._snow = new Snowflakes(props);
-                }, 1);    
+                }, 1);
             }
 
             code.set(props);
@@ -58,6 +60,10 @@ const form = new Vue({
         toggleStop() {
             this.stop = !this.stop;
             this._snow[this.stop ? 'stop' : 'start']();
+        },
+        toggleHide() {
+            this.hidden = !this.hidden;
+            this._snow[this.hidden ? 'hide' : 'show']();
         },
         loadFPS() {
             this.isFpsDisabled = true;

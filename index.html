@@ -72,9 +72,10 @@
             </div>
 
             <div class="form__bottom">
-                <input type="button" @click="toggleStop" :value="this.stop ? 'Start' : 'Stop'" />
-                <input type="button" class="form__default" @click="setDefault" value="Default" />
-                <input type="button" class="form__fps" @click="loadFPS" :disabled="isFpsDisabled" value="Show FPS"/>
+                <input type="button" class="form__button" @click="toggleHide" :value="this.hidden ? 'Show' : 'Hide'" />
+                <input type="button" class="form__button" @click="toggleStop" :value="this.stop ? 'Start' : 'Stop'" />
+                <input type="button" class="form__button" @click="setDefault" value="Default" />
+                <input type="button" class="form__button" @click="loadFPS" :disabled="isFpsDisabled" value="Show FPS"/>
             </div>
         </form>
     </div>

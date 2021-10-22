@@ -10,7 +10,7 @@ const defaultProperties = {
     maxOpacity: 1,
     minSize: 10,
     maxSize: 25,
-    wind: true
+    wind: true,
 };
 
 const code = new Vue({
