@@ -573,7 +573,6 @@
 
     function getRadioValue(elems) {
         for (var i = 0; i < elems.length; i++) {
-            console.log(elems[i]);
             if (elems[i].checked) {
                 return elems[i].value;
             }
