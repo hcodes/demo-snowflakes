@@ -53,3 +53,18 @@ label {
 .body_bg_black .header {
     color: #ddd;
 }
+
+.no-support {
+    position: absolute;
+    display: none;;
+    left: 20px;
+    top: 50px;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px;
+    border: 2px dotted red;
+}
+
+.no-support_visible {
+    display: block;
+}
