@@ -40,9 +40,15 @@ export class Form {
         toggleHide: document.querySelector('.form__toggle-hide') as HTMLButtonElement,
         default: document.querySelector('.form__default') as HTMLButtonElement,
         stop: document.querySelector('.form__stop') as HTMLButtonElement,
+        noSupport: document.querySelector('.no-support') as HTMLDivElement,
     };
 
     constructor() {
+        // @ts-ignore
+        if (Snowflakes.hasSupport && !Snowflakes.hasSupport()) {
+            this.elems.noSupport.classList.add('no-support_visible');
+        }
+
         this.elems.minOpacity.oninput = this.handleMinOpacity;
         this.elems.maxOpacity.oninput = this.handleMaxOpacity;
 
@@ -50,9 +56,10 @@ export class Form {
         this.elems.maxSize.oninput = this.handleMaxSize;
 
         this.elems.debug.onclick = this.handleDebug;
+        this.elems.color.oninput = this.handleColor;
         this.elems.count.oninput = this.handleCount;
-        this.elems.rotation.onclick = this.handleRotation;
         this.elems.speed.oninput = this.handleSpeed;
+        this.elems.rotation.onclick = this.handleRotation;
         this.elems.wind.onclick = this.handleWind;
 
         this.elems.default.onclick = this.handleDefault;
@@ -101,6 +108,11 @@ export class Form {
         this.params.maxSize = parseInt(this.elems.maxSize.value, 10);
         this.updateSnowflakes();
     } 
+
+    private handleColor = () => {
+        this.params.color = this.elems.color.value;
+        this.updateSnowflakes();
+    }
 
     private handleCount = () => {
         this.params.count = parseInt(this.elems.count.value, 10);

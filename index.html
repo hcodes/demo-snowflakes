@@ -10,9 +10,12 @@
 <body class="demo_bg_white demo_size_fullscreen">
     <h1 class="header">Falling snowflakes <a href="https://github.com/hcodes/snowflakes" class="github">Back</a></h1>
 
+    <div class="no-support">Falling snowflakes are not supported in this browser.</div>
+
     <div class="code">
-        <div class="code__label">Code: <input class="code__copy" type="button" value="Copy" /></div>
+        <div class="code__label">Code:</div>
         <textarea class="code__textarea"></textarea>
+        <input class="code__copy" type="button" value="Copy" />
     </div>
 
     <div class="form">
@@ -57,11 +60,11 @@
                 </div>
 
                 <div class="form__group">
-                    <label class="form__label_checkbox"><input class="form__rotation" type="checkbox" /> rotation</label>
+                    <label class="form__label">speed:</label> <input class="form__speed" type="number" min="0.1" max="3" step="0.1" />
                 </div>
 
                 <div class="form__group">
-                    <label class="form__label">speed:</label> <input class="form__speed" type="number" min="0.1" max="3" step="0.1" />
+                    <label class="form__label_checkbox"><input class="form__rotation" type="checkbox" /> rotation</label>
                 </div>
 
                 <div class="form__group">
