@@ -621,6 +621,7 @@
                 toggleHide: document.querySelector('.form__toggle-hide'),
                 default: document.querySelector('.form__default'),
                 stop: document.querySelector('.form__stop'),
+                noSupport: document.querySelector('.no-support'),
             };
             this.handleMinOpacity = function () {
                 _this.params.minOpacity = parseFloat(_this.elems.minOpacity.value);
@@ -636,6 +637,10 @@
             };
             this.handleMaxSize = function () {
                 _this.params.maxSize = parseInt(_this.elems.maxSize.value, 10);
+                _this.updateSnowflakes();
+            };
+            this.handleColor = function () {
+                _this.params.color = _this.elems.color.value;
                 _this.updateSnowflakes();
             };
             this.handleCount = function () {
@@ -726,14 +731,19 @@
                     });
                 });
             };
+            // @ts-ignore
+            if (Snowflakes.hasSupport && !Snowflakes.hasSupport()) {
+                this.elems.noSupport.classList.add('no-support_visible');
+            }
             this.elems.minOpacity.oninput = this.handleMinOpacity;
             this.elems.maxOpacity.oninput = this.handleMaxOpacity;
             this.elems.minSize.oninput = this.handleMinSize;
             this.elems.maxSize.oninput = this.handleMaxSize;
             this.elems.debug.onclick = this.handleDebug;
+            this.elems.color.oninput = this.handleColor;
             this.elems.count.oninput = this.handleCount;
-            this.elems.rotation.onclick = this.handleRotation;
             this.elems.speed.oninput = this.handleSpeed;
+            this.elems.rotation.onclick = this.handleRotation;
             this.elems.wind.onclick = this.handleWind;
             this.elems.default.onclick = this.handleDefault;
             this.elems.stop.onclick = this.handleStop;

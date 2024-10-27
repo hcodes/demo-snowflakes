@@ -3,7 +3,7 @@
     left: 15px;
     right: 15px;
     bottom: 0;
-    height: 150px;
+    height: 180px;
 }
 
 .code__label {
@@ -12,8 +12,8 @@
 }
 
 .code__copy {
-    font-size: 10px;
-    vertical-align: middle;
+    margin-top: 4px;
+    font-size: 16px;
 }
 
 .code__textarea {
@@ -72,7 +72,12 @@
 }
 
 .form__group input[type="number"] {
-    width: 4em;
+    width: 60px;
+}
+
+.form__color {
+    height: 20px;
+    width: 60px;
 }
 
 .form__group:hover {
@@ -175,4 +180,19 @@ label {
 
 .body_bg_black .header {
     color: #ddd;
+}
+
+.no-support {
+    position: absolute;
+    display: none;;
+    left: 20px;
+    top: 50px;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px;
+    border: 2px dotted red;
+}
+
+.no-support_visible {
+    display: block;
 }
