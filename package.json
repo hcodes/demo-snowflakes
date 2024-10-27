@@ -27,33 +27,26 @@
     "node": ">= 16"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
-    "@rollup/plugin-alias": "^2.2.0",
-    "@rollup/plugin-replace": "^2.3.4",
-    "autoprefixer": "^9.8.6",
-    "cssnano": "^4.1.10",
-    "eslint": "^6.8.0",
-    "gulp": "^4.0.2",
-    "gulp-less": "^4.0.1",
-    "gulp-postcss": "^8.0.0",
-    "gulp-rollup": "^2.17.0",
-    "gulp-uglify": "^3.0.2",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "cssnano": "^7.0.6",
     "magic-snowflakes": "^6.3.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "vue": "^2.6.14"
+    "rollup": "^4.24.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tslib": "^2.8.0",
+    "typescript": "^5.6.3"
   },
   "scripts": {
-    "test": "eslint .",
-    "build": "gulp"
+    "test": "tsc --noEmit",
+    "build": "rollup -c rollup.config.mjs"
   },
   "private": true,
   "browserslist": [
-    "ie >= 10",
-    "Firefox >= 24",
-    "Chrome >= 26",
+    "Firefox >= 80",
+    "Chrome >= 80",
     "iOS >= 6",
-    "Safari >= 6",
-    "Android > 4.0"
+    "Safari >= 9",
+    "Android > 5.0"
   ]
 }
